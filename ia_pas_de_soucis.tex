@@ -1378,6 +1378,7 @@ Il existe dans NumPy beaucoup d’attributs mais on va évoquer seulement les tr
   >>> print(x.ndim)
   >>> 2
 \end{lstlisting}
+\\
 \textbf{ndarray.shape:} il donne la taille de chaque axe. Si le tableau a 2 axes, il donnera comme réponse (x,y) avec x qui correspond aux nombres de colonnes du tableau et y pour le nombres de lignes. Il s’agit du même principe que pour les fonctions zeros, ones, full et empty puisque il s’agit enfaîte du shape que l’on inscrit après la fonction. La taille du tuple varie en fonction du nombre d’axe du tableau. 
 \begin{lstlisting}[language=Python]
   >>> import numpy as np 
@@ -1385,6 +1386,7 @@ Il existe dans NumPy beaucoup d’attributs mais on va évoquer seulement les tr
   >>> print(x.shape)
   >>> (2,3)
 \end{lstlisting}
+\\
 \textbf{ndarray.size:} Il donne le nombre total d’élément dans le tableau. Cela représente tout simplement le produit de x et y dans le shape (et des autres termes dans le shape si il y plus que 2 axes au tableau). 
 \begin{lstlisting}[language=Python]
   >>> import numpy as np 
@@ -1435,5 +1437,58 @@ Dans ce cas ci, le produit 6*1 = 2*3 est vrai, le reshape est donc fonctionnel.
   >>> [1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1.]
 \end{lstlisting}
 \subsubsection{Opérations de base}
+Pour faire une opération classique comme une addition ou une multiplication entre deux tableaux, il suffit de mettre les deux tableaux avec un +/* entre pour le faire. L’opération se fait élément par élément. L’élément 0 du tableau 1 s’additionne/se multiplie avec l’élément 0 du tableau 2, l’élément 1 du tableau 1 s’additionne/se multiplie avec l’élément 1 du tableau 2, etc. Le résultat donnera un nouveau tableau. 
+\begin{lstlisting}[language=Python]
+  >>> import numpy as np
+  >>> x = np.ones((2,3))
+  >>> y = np.array([(4,1,2), (2,0,6)])
+  >>> z = x+y
+  >>> print(z)
+  >>> [[5. 2. 3.]
+       [3. 1. 7.]]
+\end{lstlisting}
+\\
+Il y a moyen aussi de additionner/multiplier le tableau à une constante, ce qui fait comme résultat un nouveau tableau où chaque élément du tableau subit l’opération avec cette constante.
+\begin{lstlisting}[language=Python]
+  >>> import numpy as np
+  >>> y = np.array([(4,1,2), (2,0,6)])
+  >>> z = y+3
+  >>> print(z)
+  >>> [[7 4 5]
+       [5 3 9]]
+\end{lstlisting}
+\\
+Il est de plus possible de faire un opération sans forcément obtenir un nouveau tableau mais simplement en modifiant un tableau par une opération. Par exemple, multiplier tout les éléments du tableau par la valeur 2. Pour cela, il faut utiliser le signe *= .
+\begin{lstlisting}[language=Python]
+  >>> import numpy as np
+  >>> y = np.array([(4,1,2), (2,0,6)])
+  >>> y *= 2
+  >>> print(y)
+  >>> [[ 8  2  4]
+       [ 4  0 12]]
+\end{lstlisting}
+\\
+Il existe aussi quelques méthodes utilisable dans les opérations comme sum qui permet de calculer la somme de tout les éléments du tableau ou max et min qui permettent de définir respectivement la valeur maximale et la valeur minimale dans le tableau. 
+\begin{lstlisting}[language=Python]
+  >>> import numpy as np
+  >>> y = np.array([(4,1,2), (2,0,6)])
+  >>> print(y.sum())
+  >>> 15
+  >>> print(y.max())
+  >>> 6
+  >>> print(y.min())
+  >>> 0
+\end{lstlisting}
+Dans ces exemples, les méthodes sont utilisés sur tout le tableau mais il y a moyen aussi de n’utiliser une méthode que sur un axe précis. 
+\begin{lstlisting}[language=Python]
+  >>> import numpy as np
+  >>> y = np.array([(4,1,2), (2,0,6)])
+  >>> print(y.sum(axis 0))
+  >>> [6 1 8]
+  >>> print(y.max(axis 1))
+  >>> [4 6]
+\end{lstlisting}
+On notera ici que l’axis 0 = les colonnes et l’axis 1 = les lignes: shape = (0,1).
+\subsubsection{Récapitulatif}
 ...
 \end{document}
