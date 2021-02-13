@@ -1369,5 +1369,71 @@ Tout comme arange, il faut écrire après la fonction le premier élément ainsi
   >>> [2, 3.5, 5]
 \end{lstlisting}
 \subsubsection{Les attributs et les manipulations de tableau}
+Il existe dans NumPy beaucoup d’attributs mais on va évoquer seulement les trois plus intéressants et utilisés: \\
+\\
+\textbf{ndarray.ndim:} il permet de connaître le nombre d’axes du tableau. Pour rappel, les dimensions dans NumPy sont appelés axes.
+\begin{lstlisting}[language=Python]
+  >>> import numpy as np 
+  >>> x = np.array([(3,2,3), (4,1,6)])
+  >>> print(x.ndim)
+  >>> 2
+\end{lstlisting}
+\textbf{ndarray.shape:} il donne la taille de chaque axe. Si le tableau a 2 axes, il donnera comme réponse (x,y) avec x qui correspond aux nombres de colonnes du tableau et y pour le nombres de lignes. Il s’agit du même principe que pour les fonctions zeros, ones, full et empty puisque il s’agit enfaîte du shape que l’on inscrit après la fonction. La taille du tuple varie en fonction du nombre d’axe du tableau. 
+\begin{lstlisting}[language=Python]
+  >>> import numpy as np 
+  >>> x = np.array([(3,2,3), (4,1,6)])
+  >>> print(x.shape)
+  >>> (2,3)
+\end{lstlisting}
+\textbf{ndarray.size:} Il donne le nombre total d’élément dans le tableau. Cela représente tout simplement le produit de x et y dans le shape (et des autres termes dans le shape si il y plus que 2 axes au tableau). 
+\begin{lstlisting}[language=Python]
+  >>> import numpy as np 
+  >>> x = np.array([(3,2,3), (4,1,6)])
+  >>> print(np.size)
+  >>> 6
+\end{lstlisting}
+Il y a aussi dans Numpy différentes méthodes permettant de manipuler le tableau créé. 
+\\
+\textbf{np.hstack et np.vstack:} Ces deux méthodes permettent d’assembler deux tableaux ensemble horizontalement (np.hstcak) ou verticalement (np.vstack) en utilisant la fonction suivi d’un tuple constitué des deux tableaux.
+\begin{lstlisting}[language=Python]
+  >>> import numpy as np
+  >>> x = np.zeros((2,3))
+  >>> y = np.ones((2,6))
+  >>> z = np.hstack((x, y))
+  >>> print(z)
+  >>> [[0. 0. 0. 1. 1. 1. 1. 1. 1.]
+       [0. 0. 0. 1. 1. 1. 1. 1. 1.]]
+\end{lstlisting}
+Attention, pour utiliser la méthode np.hstack, il faut que les deux tableaux aient le même nombre d’élément dans une colonne (le premier terme de leur shape doit être identique) et que les deux tableaux aient le même nombre d’axe. Par contre, pour utiliser la méthode np.vstack, il faut que les deux tableaux aient le même nombre d’élément dans une ligne (le second terme dans leur shape doit être identique) et que les deux tableaux aient aussi le même nombre d’axe. Pour les deux méthodes, il est possible de fusionner autant de tableaux qu’on le souhaite ensemble, il suffit de rajouter dans le tuple les tableaux supplémentaires. 
+\\
+\textbf{reshape:} Cette méthode permet de changer la forme d’un tableau pour lui donner une nouvelle forme. Cependant, on ne peut pas changer les dimensions et les nombres d’éléments qu’il y a dans le tableau. Le reshape doit donc avoir le même produit que le shape du tableau initial.
+\begin{lstlisting}
+  >>> import numpy as np  
+  >>> x = np.arange(3, 9, 1)
+  >>> print(x)
+  >>> [3 4 5 6 7 8]
+  >>> print(x.shape)
+  >>> (6,1)
+  >>> y = x.reshape((2,3))
+  >>> print(y)
+  >>> [[3 4 5]
+       [6 7 8]]
+  >>> print(y.shape)
+  >>> (2,3)
+\end{lstlisting}
+Dans ce cas ci, le produit 6*1 = 2*3 est vrai, le reshape est donc fonctionnel.
+\\
+\textbf{ravel:} La méthode ravel permet de rapidement transformé un tableau de deux axes ou plus en un tableau à une dimension. 
+\begin{lstlisting}
+  >>> import numpy as np
+  >>> x = np.ones((2,6))
+  >>> print(x)
+  >>> [[1. 1. 1. 1. 1. 1.]
+       [1. 1. 1. 1. 1. 1.]]
+  >>> y = x.ravel( )
+  >>> print(y)
+  >>> [1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1.]
+\end{lstlisting}
+\subsubsection{Opérations de base}
 ...
 \end{document}
